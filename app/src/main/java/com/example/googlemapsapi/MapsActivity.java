@@ -20,6 +20,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
 
@@ -39,8 +41,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
+
             getLocationPermission();
             return;
         }
@@ -55,14 +56,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             double latitude = finder.getLatitude();
             double longitude = finder.getLongitude();
 
-            System.out.println(latitude);
-            System.out.println(longitude);
-
-            Toast.makeText(this, "lat-lng " + latitude + " — " + longitude, Toast.LENGTH_LONG).show();
-
             LatLng myLocation = new LatLng(latitude, longitude);
+            LatLng Thika = new LatLng(-1.0461881, 37.0714562);
+            LatLng Makuyu = new LatLng(-0.8361161, 37.2406453);
+
+            PolylineOptions polylineOptions = new PolylineOptions()
+                    .add(myLocation)
+                    .add(Thika)
+                    .add(Makuyu);
+            Polyline polyline =  mMap.addPolyline(polylineOptions);
+
+
             mMap.addMarker(new MarkerOptions().position(myLocation).title("My Location"));
+            mMap.addMarker(new MarkerOptions().position(Thika).title("Thika"));
+            mMap.addMarker(new MarkerOptions().position(Makuyu).title("Muranga"));
+
             mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
         } else {
             // Add a marker in Sydney and move the camera
             LatLng sydney = new LatLng(-34, 151);
