@@ -9,33 +9,33 @@ import android.widget.TextView;
 public class FairApproximation extends AppCompatActivity {
     ViewPager backgroundMap, frontMap;
     TextView distance, rate, charge;
-    MapsActivity mapsActivity;
+    MapsFragment mapsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fair_approximation);
 
-        backgroundMap = (ViewPager) findViewById(R.id.mapHolder);
-        frontMap = (ViewPager) findViewById(R.id.MainMapView);
+//        backgroundMap = (ViewPager) findViewById(R.id.mapHolder);
+//        frontMap = (ViewPager) findViewById(R.id.MainMapView);
         distance = (TextView) findViewById(R.id.distance);
         rate = (TextView) findViewById(R.id.rate);
         charge = (TextView) findViewById(R.id.charge);
-        mapsActivity = new MapsActivity();
+        mapsFragment = new MapsFragment();
 
-        final MapAdapter adapter = new MapAdapter(getSupportFragmentManager(), this);
-        adapter.addFragment(mapsActivity);
+//        final MapAdapter adapter = new MapAdapter(getSupportFragmentManager(), this);
+//        adapter.addFragment(mapsFragment);
 
-        backgroundMap.setAdapter(adapter);
-        frontMap.setAdapter(adapter);
+//        backgroundMap.setAdapter(adapter);
+//        frontMap.setAdapter(adapter);
 
         double distanceTxt = getDistance();
-        int rateTxt = 100;
+        int rateTxt = 50;
         double chargeTxt = distanceTxt * rateTxt;
 
-        distance.setText(String.format("%s Km", Double.toString(distanceTxt)));
-        rate.setText(String.format("%s per Km", Double.toString(rateTxt)));
-        charge.setText(String.format("Ksh. %s", Double.toString(chargeTxt)));
+        distance.setText(String.format("%.3f Km", distanceTxt));
+        rate.setText(String.format("%s Ksh per Km", Integer.toString(rateTxt)));
+        charge.setText(String.format("Ksh %,.0f", chargeTxt));
     }
 
     private double getDistance() {

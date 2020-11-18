@@ -7,11 +7,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapAdapter extends FragmentPagerAdapter {
     private Context context;
-    private List<Fragment> mFragment;
+    private final List<Fragment> mFragment = new ArrayList<>();
 
 
     public MapAdapter(@NonNull FragmentManager fm, Context context) {
