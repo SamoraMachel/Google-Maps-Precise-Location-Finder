@@ -84,7 +84,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/delius"
-                        android:text="Ngumba to Thika"
+                        android:text="My Location to Thika"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
